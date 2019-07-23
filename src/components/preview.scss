@@ -1,0 +1,21 @@
+@import './util/util.scss';
+
+.preview {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  & input {
+    width: 50%;
+    height: 30px;
+    padding: 10px;
+    font: 20px 'Open Sans', sans-serif;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid $border-color;
+    
+    &:focus {
+        outline: none;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+.todo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 30px;
+
+  & input {
+    width: 50%;
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid #9e9e9e;
+    padding: 10px;
+    font: 20px 'Opan Sans', sans-serif;
+    &:focus {
+      outline: none;
+    }
+  }
+}
