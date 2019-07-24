@@ -9,6 +9,7 @@ const App = () => {
     <div className="App">
       <Header title="Mayur Panchal" />
       <Todo />
+      <button id="btn-home">Add to Home Screen</button>
       <Preview />
     </div>
   );
