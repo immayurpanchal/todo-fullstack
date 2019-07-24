@@ -22,7 +22,70 @@ const isLocalhost = Boolean(
 
 export function register(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    //Start Add-to-home screen feature
     // The URL constructor is available in all browsers that support SW.
+    console.log('inside service worker');
+    let deferredPrompt;
+
+    window.addEventListener("appinstalled", () => {
+      console.log("app installed successfully");
+    });
+
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      console.log("display-mode is standalone");
+    } else {
+      console.log("not open in the standalone app");
+    }
+
+    window.addEventListener("beforeinstallprompt", e => {
+      console.log("inside the before install");
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+      console.log("inside the deferredPrompt ", deferredPrompt);
+
+      // Update UI to notify the user they can add to home screen
+      // document.querySelector(".add-button").style.display = "block";
+    });
+
+    const btnAdd = document.querySelector("#btn-deep");
+    const divgotit = document.querySelector("#div-gotit");
+    const btngotit = document.querySelector("#btn-gotit");
+    divgotit.style.display = "none";
+    // Installation must be done by a user gesture! Here, the button click
+    btnAdd.addEventListener("click", e => {
+      // hide our user interface that shows our A2HS button
+      btnAdd.style.display = "none";
+      // Show the prompt
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        console.log("open deferredPrompt");
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then(choiceResult => {
+          if (choiceResult.outcome === "accepted") {
+            console.log("User accepted the A2HS prompt");
+            console.log("user added to the home page ");
+            btnAdd.style.display = "block";
+          } else {
+            console.log("User dismissed the A2HS prompt");
+            console.log("user cancel to the home page ");
+            btnAdd.style.display = "block";
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        console.log("not open deferred already installed");
+        divgotit.style.display = "block";
+      }
+    });
+    btngotit.addEventListener("click", e => {
+      divgotit.style.display = "none";
+      btnAdd.style.display = "block";
+    });
+
+    //End of Add-to-Home screen
+
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
       // Our service worker won't work if PUBLIC_URL is on a different origin
@@ -30,6 +93,10 @@ export function register(config) {
       // serve assets; see https://github.com/facebook/create-react-app/issues/2374
       return;
     }
+
+    //Start Add-to-Home feature 
+    
+    //End Add-to-Home feature
 
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
