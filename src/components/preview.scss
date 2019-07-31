@@ -11,7 +11,7 @@
     padding: 10px;
     font: 20px 'Open Sans', sans-serif;
     margin-bottom: 10px;
-    border-radius: 3px;
+    border-radius: $border-corner;
     border: 1px solid $border-color;
     
     &:focus {
