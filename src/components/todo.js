@@ -8,6 +8,9 @@ const Todo = () => {
 
   const addTodo = e => {
     e.preventDefault();
+    if(!todo)
+      return;
+      
     dispatch({type: 'ADD_TODO', payload: { id: Math.random(), name: todo, completed: false}});
     setTodo('');
   }
