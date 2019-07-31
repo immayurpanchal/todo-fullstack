@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './preview.scss';
+import { useSelector } from 'react-redux';
 
 const Preview = () => {
-  const [todoList] = useState([
-    'Eating Breakfast',
-    'Go To Office',
-    'Do Some Work'
-  ]);
-
+  const todos = useSelector(state => state.todos);
+  
   return (
     <div className="preview">
-      {todoList.map(todo => <input disabled value={`${todo}`} />)}
+      {todos.map(todo => <input disabled value={`${todo.name}`} key={todo.id}/>)}
     </div>
   );
 }

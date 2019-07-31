@@ -5,14 +5,14 @@ import Preview from './components/preview';
 import './App.scss';
 
 const App = () => {
-  return (
-    <div className="App">
-      <Header title="Mayur Panchal" />
-      <Todo />
-      <button id="btn-home">Add to Home Screen</button>
-      <Preview />
-    </div>
-  );
+	return (
+		<div className="App">
+			<Header title="Mayur Panchal" />
+			<Todo />
+			{/* <button id="btn-home">Add to Home Screen</button> */}
+			<Preview />
+		</div>
+	);
 };
 
 export default App;
