@@ -8,9 +8,9 @@ const App = () => {
 	return (
 		<div className="App">
 			<Header title="Mayur Panchal" />
-			<Todo />
+			{/* <Todo /> */}
 			<button id="btn-home">Add to Home Screen</button>
-			<Preview />
+			{/* <Preview /> */}
 		</div>
 	);
 };
