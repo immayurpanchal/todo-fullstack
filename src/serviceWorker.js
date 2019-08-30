@@ -19,6 +19,14 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
+	if (
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone
+  ) {
+    console.log('he is using PWA'); // Send Log user is using PWA
+  } else {
+    console.log('he is not PWA'); // Send Log user is normal
+  }
   
 	if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(function(registration) {
