@@ -29,33 +29,16 @@ export function register(config) {
   }
   
 	if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(function(registration) {
-      console.log('Service worker  registrado com sucesso:', registration);
-      // request_debug(registration);
-
-    }).catch(function(error) {
-      console.log('Falha ao Registrar o Service Worker:', error);
-      // request_debug(error);
-
-    });
-
-		console.log('only serviceNagivator');
 		let deferredPrompt;
 
 		window.addEventListener('beforeinstallprompt', e => {
-      console.log('inside beforeinstalledPrompt');
+      		console.log('inside beforeinstalledPrompt');
 			// Prevent Chrome 67 and earlier from automatically showing the prompt
 			e.preventDefault();
 			// Stash the event so it can be triggered later.
 			deferredPrompt = e;
-    });
 
-    let btnAdd = document.querySelector('#btn-home');
-    btnAdd.addEventListener('click', (e) => {
-      // hide our user interface that shows our A2HS button
-      btnAdd.style.display = 'none';
-      // Show the prompt
-      deferredPrompt.prompt();
+			deferredPrompt.prompt();
       // Wait for the user to respond to the prompt
       deferredPrompt.userChoice
         .then((choiceResult) => {
@@ -84,6 +67,14 @@ export function register(config) {
 		}
 
 		window.addEventListener('load', () => {
+			navigator.serviceWorker.register('/sw.js').then(function(registration) {
+				// Registration was successful
+				console.log('ServiceWorker registration successful with scope: ', registration.scope);
+			  }, function(err) {
+				// registration failed :(
+				console.log('ServiceWorker registration failed: ', err);
+			  });
+			  
 			const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
 			if (isLocalhost) {
