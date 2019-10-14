@@ -9,7 +9,7 @@ const App = () => {
 		<div className="App">
 			<Header title="Mayur Panchal" />
 			{/* <Todo /> */}
-			<button id="btn-home">Add to Home Screen - Mayur Panchal - Hello world</button>
+			<button id="btn-home">Add to Home Screen - 1</button>
 			{/* <Preview /> */}
 		</div>
 	);
